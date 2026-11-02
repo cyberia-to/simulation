@@ -2,7 +2,7 @@
 name = "simulation-chain"
 version = "0.1.0"
 edition = "2021"
-description = "network + economy simulator of the cyber phase-1 chain: N in-process nodes on the real soft3 kernel, a simulated network, adversaries, invariants"
+description = "network + economy simulator of the cyber phase-1 chain: N in-process nodes on the real cybernode kernel (through the soft3 facade), a simulated network, adversaries, invariants"
 license = "LicenseRef-CYBER"
 repository = "https://github.com/cyberia-to/simulation"
 
@@ -20,7 +20,10 @@ default = []
 metal = ["soft3/metal"]
 
 [dependencies]
-# the real kernel: consensus, store, wire codecs, mempool, economy (tracks soft3 main)
+# the real kernel: consensus, store, wire codecs, mempool, economy. The kernel is
+# cybernode's (rung 7, soft3/proposals/cybernode.md); soft3 is the facade that
+# re-exports it, and this path tracks soft3 main until the stack resolves.
+# TODO(cybernode): depend on cybernode directly once the stack resolves
 soft3 = { path = "../../soft3/crate", default-features = false, features = ["sim"] }
 mudra = { package = "cyber-mudra", version = "0.1.0", path = "../../mudra", default-features = false, features = ["bridge"] }
 hemera = { package = "cyber-hemera", version = "0.4", path = "../../hemera/rs" }

@@ -9,6 +9,8 @@ on:
     branches: [main]
   pull_request:
   repository_dispatch:
+    # the dispatch moves to cybernode (cybernode-merged) when chain/Cargo.toml
+    # depends on the cybernode crate instead of the soft3 facade
     types: [soft3-merged]
   schedule:
     - cron: '23 */6 * * *'
